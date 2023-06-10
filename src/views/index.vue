@@ -1,28 +1,37 @@
 <template>
   <div class="app-container home">
-    <h1>欢迎使用xxxx</h1>
-    <div>您还未登陆，请先登陆！！！</div>
-    <a-button type="primary" @click="goLogin">登陆</a-button>
+    <div class="hello">
+      <h1>欢迎使用xxxx</h1>
+      <div v-if="!sid">
+        <div>您还未登陆，请先登陆！！！</div>
+        <a-button type="primary" @click="showLogin">登陆</a-button>
+      </div>
+    </div>
+
   </div>
 
 </template>
 
 <script setup name="Home">
 import { useRouter } from 'vue-router'
+import cache from '../utils/cache'
 
 const router = useRouter()
 
-function goTarget(url) {
-  window.open(url, '__blank')
-}
+let sid = cache.session.get('sid')
 
-// 去登陆
-function goLogin() {
+function showLogin() {
   router.push('/login')
 }
 </script>
 
 <style scoped lang="scss">
+.hello {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .home {
   blockquote {
     padding: 10px 20px;
@@ -71,18 +80,10 @@ function goLogin() {
       font-weight: 700;
     }
   }
+}
 
-  .update-log {
-    ol {
-      display: block;
-      list-style-type: decimal;
-      margin-block-start: 1em;
-      margin-block-end: 1em;
-      margin-inline-start: 0;
-      margin-inline-end: 0;
-      padding-inline-start: 40px;
-    }
-  }
+.login-form-button {
+  width: 100%;
 }
 </style>
 

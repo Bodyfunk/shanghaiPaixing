@@ -9,8 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
     "ant-design-vue": "^3.2.20",
+    "axios": "^1.4.0",
+    "js-cookie": "^3.0.5",
     "sass": "^1.63.2",
+    "tools-vue3": "^1.0.44",
     "vue": "^3.2.47",
     "vue-router": "^4.2.2"
   },

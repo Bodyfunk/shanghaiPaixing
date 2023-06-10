@@ -1,11 +1,27 @@
 import { createWebHashHistory, createRouter } from 'vue-router'
-
+import Layout from '../views/Layout.vue'
 
 
 
 const routes = [
-  { path: '/home', component: () => import('../views/index.vue') },
-  { path: '/monitor', component: () => import('../views/monitor/index.vue') },
+  {
+    path: '',
+    component: Layout,
+    children: [{
+      path: '/home',
+      component: () => import('../views/index.vue'),
+    }]
+  },
+  {
+    path: '',
+    component: Layout,
+    children: [{
+      path: '/monitor',
+      component: () => import('../views/monitor/index.vue')
+    }]
+  },
+  { path: '/login', component: () => import('../views/login.vue') },
+  { path: '/register', component: () => import('../views/register.vue') }
 ]
 
 const router = createRouter({

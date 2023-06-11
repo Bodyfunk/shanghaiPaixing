@@ -50,11 +50,20 @@
     <div>
       <h3>服务区</h3>
       <a-tabs v-model:activeKey="activeKey">
-        <a-tab-pane key="1" tab="Tab 1">Content of Tab Pane 1</a-tab-pane>
-        <a-tab-pane key="2" tab="Tab 2" force-render
-          >Content of Tab Pane 2</a-tab-pane
+        <a-tab-pane
+          v-for="(item, index) of serviceArr"
+          :key="index"
+          :tab="item.value.alias"
         >
-        <a-tab-pane key="3" tab="Tab 3">Content of Tab Pane 3</a-tab-pane>
+          <a-descriptions :title="item.value.host" :column="4">
+            <a-descriptions-item
+              v-for="el of item.value.params"
+              :key="el.name"
+              :label="el.alias"
+              >{{ Object.values(el.Value)[0] }}</a-descriptions-item
+            >
+          </a-descriptions>
+        </a-tab-pane>
       </a-tabs>
     </div>
   </div>
@@ -319,10 +328,6 @@ machineArr.value = [
   machinedaemon,
 ];
 
-// setTimeout(() => {
-//   console.log(machineArr.value[0].value.endpt);
-// }, 10000);
-
 // 5个服务
 const servicedbsv_chn = ref({});
 WSUtils.CEvent.on("service-dbsv_chn", (data) => {
@@ -348,6 +353,16 @@ const servicedata_dv4 = ref({});
 WSUtils.CEvent.on("service-data_dv4", (data) => {
   servicedata_dv4.value = JSON.parse(data);
 });
+
+const serviceArr = ref([]);
+
+serviceArr.value = [
+  servicedbsv_chn,
+  servicerevc_revc,
+  servicerevc_data,
+  servicepars_chn1,
+  servicedata_dv4,
+];
 </script>
 
 <style>

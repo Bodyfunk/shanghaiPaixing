@@ -38,6 +38,11 @@ export default defineConfig({
       //   target: 'wss://172.22.225.34:9888/ws',
       //   ws: true,
       // },
+      '/ws': {
+        target: 'wss://localhost:9888',
+        ws: false,
+        secure: false,
+      }
 
     },
   },

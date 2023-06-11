@@ -1,12 +1,12 @@
 import { WebSocketBean } from 'tools-vue3'
 export default class WSUtil {
     static ws: WebSocketBean
-    static async init(url) {
+    static async init(wsUrl) {
         const sendSuffix = ''
 
         //初始化websokcet对象
         this.ws = new WebSocketBean({
-            url: 'wss://172.22.225.24:9888/ws/39055e6b',
+            url: wsUrl,
             needReconnect: true,
             reconnectGapTime: 3000,
             onerror: () => {

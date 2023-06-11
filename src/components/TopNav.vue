@@ -31,41 +31,47 @@
   </a-modal>
 </template>
 <script setup>
-import { UserOutlined } from "@ant-design/icons-vue";
-import { computed, defineComponent, ref, watch } from "vue";
-import { useRouter } from "vue-router";
-import cache from "../utils/cache";
-import { signOut } from "../api/login";
+import { UserOutlined } from '@ant-design/icons-vue'
+import { computed, defineComponent, ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import cache from '../utils/cache'
+import { signOut } from '../api/login'
+import WSUtils from '@/utils/ws.ts'
 
-let sid = cache.session.get("sid");
+let sid = cache.session.get('sid')
 
-const router = useRouter();
-const current = ref(["/home"]);
+const router = useRouter()
+const current = ref(['/home'])
 
 watch(
   () => router.currentRoute.value.fullPath,
   (newValue) => {
-    current.value = [newValue];
+    current.value = [newValue]
   },
   { immediate: true }
-);
+)
 
 function gotoHome() {
-  console.log("gotoHome");
-  router.push("/home");
+  console.log('gotoHome')
+  router.push('/home')
 }
 
 function gotoMonitor() {
-  console.log("gotoMonitor");
-  router.push("/monitor");
+  console.log('gotoMonitor')
+  router.push('/monitor')
 }
 
-const visible = ref(false);
+const visible = ref(false)
 function handleSignOut() {
   signOut().then(() => {
-    cache.session.remove("sid");
-    router.push("/login");
-  });
+    WSUtils.ws.dispose()
+    cache.session.remove('sid')
+    router.push('/login')
+  })
+}
+
+if (!cache.session.get('sid')) {
+  router.push('/home')
 }
 </script>
 

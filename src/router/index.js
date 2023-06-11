@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
   }
   const Token = cache.session.get('sid')
   if (!Token) {
-    return next('/login')
+    return next('/home')
   }
   next()
 

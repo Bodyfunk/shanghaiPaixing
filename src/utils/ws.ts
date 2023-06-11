@@ -6,7 +6,7 @@ export default class WSUtil {
 
         //初始化websokcet对象
         this.ws = new WebSocketBean({
-            url: url,
+            url: 'wss://172.22.225.24:9888/ws/39055e6b',
             needReconnect: true,
             reconnectGapTime: 3000,
             onerror: () => {

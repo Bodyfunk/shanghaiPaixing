@@ -92,9 +92,9 @@ const activeKey = ref('1')
 const wsUrl = ref('')
 function socketAddr() {
   getWebsocket().then((res) => {
-    // wsUrl.value = 'wss://' + window.location.host + '/socket.io' + res.data.url
-    wsUrl.value = 'wss://172.22.225.24:9888' + res.data.url
-    ws.init(wsUrl.value)
+    // wsUrl.value = 'wss://' + window.location.host + res.data.url
+    // wsUrl.value = 'wss://172.22.225.24:9888' + res.data.url
+    ws.init()
   })
 }
 socketAddr()

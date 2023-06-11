@@ -10,7 +10,7 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 
 export default defineConfig({
   plugins: [vue(),
-    basicSsl],
+  basicSsl()],
   resolve: {
     // https://cn.vitejs.dev/config/#resolve-alias
     alias: {
@@ -23,7 +23,7 @@ export default defineConfig({
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue']
   },
   server: {
-    https: false,
+    https: true,
     proxy: {
 
 
@@ -34,11 +34,9 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
-      // '/socket.io': {
-      //   target: 'wss://172.22.225.34:9888',
+      // '/ws': {
+      //   target: 'wss://172.22.225.34:9888/ws',
       //   ws: true,
-      //   changeOrigin: true,
-      //   rewrite: (path) => path.replace(/^\/socket.io/, ''),
       // },
 
     },

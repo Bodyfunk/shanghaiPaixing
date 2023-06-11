@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container home">
+  <div class="app-container home" :key="sid + 1">
     <div class="hello">
       <h1>欢迎使用xxxx</h1>
       <div v-if="!sid">
@@ -7,21 +7,19 @@
         <a-button type="primary" @click="showLogin">登陆</a-button>
       </div>
     </div>
-
   </div>
-
 </template>
 
 <script setup name="Home">
-import { useRouter } from 'vue-router'
-import cache from '../utils/cache'
+import { useRouter } from "vue-router";
+import cache from "../utils/cache";
 
-const router = useRouter()
+const router = useRouter();
 
-let sid = cache.session.get('sid')
+let sid = cache.session.get("sid");
 
 function showLogin() {
-  router.push('/login')
+  router.push("/login");
 }
 </script>
 
@@ -54,7 +52,7 @@ function showLogin() {
     margin: 0;
   }
 
-  font-family: 'open sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   color: #676a6c;
   overflow-x: hidden;

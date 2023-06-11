@@ -5,7 +5,15 @@
     <div>
       <h3>硬件状态信息区</h3>
       <a-row type="flex" justify="space-around" align="middle">
-        <a-card title="硬盘" style="width: 30%">
+        <a-card
+          v-for="(item, index) of machineArr"
+          :key="index"
+          :title="item.value.alias"
+          style="width: 25%"
+        >
+          这里放饼图
+        </a-card>
+        <!-- <a-card title="硬盘" style="width: 30%">
           <p>总剩余：</p>
           <p>总容量：</p>
           <p>总空闲：</p>
@@ -19,7 +27,7 @@
           <p>card content</p>
           <p>card content</p>
           <p>card content</p>
-        </a-card>
+        </a-card> -->
       </a-row>
     </div>
     <!-- 进程状态信息区 -->
@@ -44,7 +52,7 @@
 
 <script setup name="Monitor">
 import { getWebsocket } from "@/api/service";
-import { ref } from "vue";
+import { nextTick, ref } from "vue";
 import WSUtils from "@/utils/ws.ts";
 
 // 进程假数据
@@ -99,11 +107,94 @@ function socketAddr() {
       WSUtils.init(wsUrl.value);
     })
     .then(() => {
-      console.log("  服务器Echo原始信息");
       WSUtils.ws.send("服务器Echo原始信息");
     });
 }
 socketAddr();
+
+// 八个硬件服务器
+const machineBis = ref({});
+WSUtils.CEvent.on("machine-bis", (data) => {
+  machineBis.value = JSON.parse(data);
+});
+
+const machineRdata = ref({});
+WSUtils.CEvent.on("machine-rdata", (data) => {
+  machineRdata.value = JSON.parse(data);
+});
+
+const machinePars = ref({});
+WSUtils.CEvent.on("machine-pars", (data) => {
+  machinePars.value = JSON.parse(data);
+});
+
+const machinedbsv1 = ref({});
+WSUtils.CEvent.on("machine-dbsv1", (data) => {
+  machinedbsv1.value = JSON.parse(data);
+});
+
+const machinedbsv2 = ref({});
+WSUtils.CEvent.on("machine-dbsv2", (data) => {
+  machinedbsv2.value = JSON.parse(data);
+});
+
+const machinerfile = ref({});
+WSUtils.CEvent.on("machine-rfile", (data) => {
+  machinerfile.value = JSON.parse(data);
+});
+
+const machinedbsv3 = ref({});
+WSUtils.CEvent.on("machine-dbsv3", (data) => {
+  machinedbsv3.value = JSON.parse(data);
+});
+
+const machinedaemon = ref({});
+WSUtils.CEvent.on("machine-daemon", (data) => {
+  machinedaemon.value = JSON.parse(data);
+});
+
+const machineArr = ref([]);
+
+machineArr.value = [
+  machineBis,
+  machineRdata,
+  machinePars,
+  machinedbsv1,
+  machinedbsv2,
+  machinerfile,
+  machinedbsv3,
+  machinedaemon,
+];
+
+// setTimeout(() => {
+//   console.log(machineArr.value[0].value.endpt);
+// }, 10000);
+
+// 5个服务
+const servicedbsv_chn = ref({});
+WSUtils.CEvent.on("service-dbsv_chn", (data) => {
+  servicedbsv_chn.value = JSON.parse(data);
+});
+
+const servicerevc_revc = ref({});
+WSUtils.CEvent.on("service-recv_recv", (data) => {
+  servicerevc_revc.value = JSON.parse(data);
+});
+
+const servicerevc_data = ref({});
+WSUtils.CEvent.on("service-recv_data", (data) => {
+  servicerevc_data.value = JSON.parse(data);
+});
+
+const servicepars_chn1 = ref({});
+WSUtils.CEvent.on("service-pars_chn1", (data) => {
+  servicepars_chn1.value = JSON.parse(data);
+});
+
+const servicedata_dv4 = ref({});
+WSUtils.CEvent.on("service-data_dv4", (data) => {
+  servicedata_dv4.value = JSON.parse(data);
+});
 </script>
 
 <style>

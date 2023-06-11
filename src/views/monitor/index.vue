@@ -199,6 +199,9 @@ WSUtils.CEvent.on("machine-rdata", (data) => {
   machineRdata.value["machineCPUInfo"] = formatValue(
     getDataByName(machineRdata.value.params, "cpu").Value
   );
+  machineBis.value["machineCourseInfo"] = formatValue2(
+    removeLastElements(machineBis.value.params, 4)
+  );
 });
 
 const machinePars = ref({});
@@ -212,6 +215,9 @@ WSUtils.CEvent.on("machine-pars", (data) => {
   );
   machinePars.value["machineCPUInfo"] = formatValue(
     getDataByName(machinePars.value.params, "cpu").Value
+  );
+  machineRdata.value["machineCourseInfo"] = formatValue2(
+    removeLastElements(machineRdata.value.params, 4)
   );
 });
 
@@ -227,6 +233,9 @@ WSUtils.CEvent.on("machine-dbsv1", (data) => {
   machinedbsv1.value["machineCPUInfo"] = formatValue(
     getDataByName(machinedbsv1.value.params, "cpu").Value
   );
+  machinedbsv1.value["machineCourseInfo"] = formatValue2(
+    removeLastElements(machinedbsv1.value.params, 4)
+  );
 });
 
 const machinedbsv2 = ref({});
@@ -240,6 +249,9 @@ WSUtils.CEvent.on("machine-dbsv2", (data) => {
   );
   machinedbsv2.value["machineCPUInfo"] = formatValue(
     getDataByName(machinedbsv2.value.params, "cpu").Value
+  );
+  machinedbsv2.value["machineCourseInfo"] = formatValue2(
+    removeLastElements(machinedbsv2.value.params, 4)
   );
 });
 
@@ -255,6 +267,9 @@ WSUtils.CEvent.on("machine-rfile", (data) => {
   machinerfile.value["machineCPUInfo"] = formatValue(
     getDataByName(machinerfile.value.params, "cpu").Value
   );
+  machinerfile.value["machineCourseInfo"] = formatValue2(
+    removeLastElements(machinerfile.value.params, 4)
+  );
 });
 
 const machinedbsv3 = ref({});
@@ -268,6 +283,9 @@ WSUtils.CEvent.on("machine-dbsv3", (data) => {
   );
   machinedbsv3.value["machineCPUInfo"] = formatValue(
     getDataByName(machinedbsv3.value.params, "cpu").Value
+  );
+  machinedbsv3.value["machineCourseInfo"] = formatValue2(
+    removeLastElements(machinedbsv3.value.params, 4)
   );
 });
 
@@ -283,8 +301,9 @@ WSUtils.CEvent.on("machine-daemon", (data) => {
   machinedaemon.value["machineCPUInfo"] = formatValue(
     getDataByName(machinedaemon.value.params, "cpu").Value
   );
-  console.log("系统监控服务器");
-  console.log(machinedaemon.value.machineCPUInfo);
+  machinedaemon.value["machineCourseInfo"] = formatValue2(
+    removeLastElements(machinedaemon.value.params, 4)
+  );
 });
 
 const machineArr = ref([]);
